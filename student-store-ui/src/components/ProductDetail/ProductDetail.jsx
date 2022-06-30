@@ -11,7 +11,7 @@ export default function ProductDetail(props) {
   const [isFetching, setIsFetching] = useState(false)
   const { productId } = useParams()
   const productsApiUrl = "https://codepath-store-api.herokuapp.com/store"
-  
+
   var isValid = false
   for (let i = 0; i < props.products.length; i++) {
     if(props.products[i].id == productId) {
@@ -25,22 +25,22 @@ export default function ProductDetail(props) {
       quantity = props.shoppingCart[i].quantity
     }
   }
-  
+
   useEffect(() => {
     setIsFetching(true)
     async function fetchData() {
       const { data } = await axios(`${productsApiUrl}/${productId}`)
       setProduct(data.product)
+      setIsFetching(false)
     }
     fetchData()
-    setIsFetching(false)
   })
 
   return (
     <div className="product-detail">
       {isFetching
         ? <h1 className="loading">Loading...</h1>
-        : isValid 
+        : isValid
           ? <ProductView quantity={quantity} productId={productId} product={product} handleAddItemToCart={props.handleAddItemToCart} handleRemoveItemFromCart={props.handleRemoveItemFromCart}/>
           : <NotFound />
       }
