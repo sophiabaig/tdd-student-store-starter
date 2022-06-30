@@ -106,7 +106,11 @@ export default function App() {
       console.log("shopping cart state", shoppingCart)
     // in cart, increase product quantity
     } else {
-      newShoppingCart[itemIndex].quantity += 1
+      const oldItem = newShoppingCart[itemIndex];
+      newShoppingCart[itemIndex] = {
+        ...oldItem,
+        quantity: oldItem.quantity + 1,
+      };
     }
     setShoppingCart(newShoppingCart)
     console.log(shoppingCart)
