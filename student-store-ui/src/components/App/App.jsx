@@ -67,9 +67,9 @@ export default function App() {
       } catch (err) {
         setError(err)
       }
+      setIsFetching(false)
     }
     fetchData()
-    setIsFetching(false)
 
 
     if(products.length == 0) {
