@@ -1,0 +1,16 @@
+.hero {
+    display: flex;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.intro {
+    padding: 2rem 2rem 2rem 2rem;
+}
+
+.hero-img {
+    margin: 0 2rem 0 0;
+    width: 50px;
+    height: 50px;
+}

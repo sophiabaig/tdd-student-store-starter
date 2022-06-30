@@ -1,0 +1,9 @@
+.sidebar {
+    height: 100%;
+    position: fixed;
+    background-color: rgb(190, 215, 223);
+    width: 100px;
+}
+.open {
+    width: 400px;
+}

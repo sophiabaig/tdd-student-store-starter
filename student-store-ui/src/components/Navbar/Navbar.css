@@ -1,0 +1,8 @@
+.navbar {
+    width: 100vw;
+    position: fixed;
+    display: flex;
+    justify-content: flex-end;
+    background-color: rgb(190, 215, 223);
+    height: 50px;
+}
