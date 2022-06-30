@@ -36,33 +36,17 @@ export default function App() {
         setIsFetching(true)
         var { data } = await axios(productsApiUrl)
         console.log("axois data", data.products)
-        var allProducts = data.products
-        // setProducts(allProducts)
-        console.log("now products", products)
-        if (category != "all") {
-          console.log("in category filtering")
-          console.log(category)
-          var filteredProducts = []
-          for (let i = 0; i < allProducts.length; i++) {
-            var curProductCategory = allProducts[i].category
-            if (curProductCategory == category) {
-              filteredProducts.push(allProducts[i])
-            }
+        var allProducts = data.products.filter(product => {
+          if (category != "all" && product.category != category) {
+            return false;
           }
-          allProducts = filteredProducts
-          // setProducts(filteredProducts)
-        }
-        if (search.length > 0) {
-          var filteredProducts = []
-          for (let i = 0; i < allProducts.length; i++) {
-            var curProductName = allProducts[i].name.toLowerCase()
-            if (curProductName.includes(search)) {
-              filteredProducts.push(allProducts[i])
-            }
+
+          if (search.length > 0 && !allProducts[i].name.toLowerCase().includes(search)) {
+            return false;
           }
-          allProducts = filteredProducts
-          // setProducts(filteredProducts)
-        }
+
+          return true;
+        });
         setProducts(allProducts)
       } catch (err) {
         setError(err)
