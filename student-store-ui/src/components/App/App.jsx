@@ -70,7 +70,7 @@ export default function App() {
     }
     fetchData()
     setIsFetching(false)
-    
+
 
     if(products.length == 0) {
       setError("no products found in response")
@@ -87,13 +87,8 @@ export default function App() {
 
   const handleAddItemToCart = (productId) => {
     // console.log(shoppingCart)
-    var itemIndex = -1
     // look if product already in shopping cart
-    for (let i = 0; i < shoppingCart.length; i++) {
-      if (shoppingCart[i].itemId == productId) {
-        itemIndex = i
-      }
-    }
+    var itemIndex = shoppingCart.findIndex(item => item.itemID == productId);
     var newShoppingCart = []
     for (let i = 0; i < shoppingCart.length; i++) {
       newShoppingCart.push(shoppingCart[i])
@@ -170,7 +165,7 @@ export default function App() {
     setCheckoutForm(newCheckoutForm)
     console.log("new checkout form", checkoutForm)
   }
-  
+
   const handleOnSubmitCheckoutForm = () => {
     console.log("in check out button onclick")
     console.log(checkoutForm)
@@ -196,7 +191,7 @@ export default function App() {
     //   setCheckoutMessage("Success!")
     //   setShoppingCart([])
     //   setCheckoutForm({})
-    // } 
+    // }
   }
 
   const handleOnSearchChange = (event) => {
