@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { useState, useEffect } from "react"
 import axios from 'axios';
 import "./App.css"
+import { addItemToCart } from "../../cart"
 
 export default function App() {
   var basicUser = {
@@ -70,42 +71,9 @@ export default function App() {
   }
 
   const handleAddItemToCart = (productId) => {
-    // console.log(shoppingCart)
-    // look if product already in shopping cart
-    var itemIndex = shoppingCart.findIndex(item => item.itemID == productId);
-    var newShoppingCart = []
-    for (let i = 0; i < shoppingCart.length; i++) {
-      newShoppingCart.push(shoppingCart[i])
-    }
-    // not in cart, add new product in cart
-    if (itemIndex == -1) {
-      console.log("not in cart")
-      var newItem = {
-        itemId: productId,
-        quantity: 1
-      }
-      console.log(newItem)
-      newShoppingCart.push(newItem)
-      // setShoppingCart([...shoppingCart, newItem])
-      console.log("shopping cart state", shoppingCart)
-    // in cart, increase product quantity
-    } else {
-      const oldItem = newShoppingCart[itemIndex];
-      newShoppingCart[itemIndex] = {
-        ...oldItem,
-        quantity: oldItem.quantity + 1,
-      };
-    }
-    setShoppingCart(newShoppingCart)
-    console.log(shoppingCart)
-    // add product price to total price
-    itemIndex = -1
-    for (let i = 0; i < products.length; i++) {
-        if (products[i].id == productId) {
-            itemIndex = i
-        }
-    }
-    setTotal(total + products[itemIndex].price)
+    const {newShoppingCart, newTotal} = addItemToCart(shoppingCart, products, total, productId);
+    setShoppingCart(newShoppingCart);
+    setTotal(newTotal);
   }
 
   const handleRemoveItemFromCart = (productId) => {
